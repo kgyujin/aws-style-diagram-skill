@@ -5,6 +5,8 @@ description: AWS 공식 아키텍처 아이콘 스타일(AWS Cloud, Region, VPC,
 
 # AWS 스타일 구성도
 
+Claude Code와 Codex에서 같은 폴더를 함께 쓴다(`install.sh`가 두 스킬 폴더에 링크를 건다).
+
 이 파일이 있는 폴더를 `SKILL`이라고 부른다. 그림은 spec JSON 한 개로 정하고 `scripts/render.py`로 그린다.
 좌표는 직접 정하지만 연결점, 아이콘 타일, 라벨 바탕, 배치 검사는 스크립트가 맡는다.
 
@@ -29,7 +31,8 @@ python3 -I "$SKILL/scripts/fetch_brand.py" redis mongodb          # 없는 기�
    - `web3tier.json`: 리전, 퍼블릭/프라이빗 서브넷이 있는 웹 3계층(CloudFront, ALB, ECS, Aurora)
 4. **그린다.** `render.py`가 끝에 배치 검사 결과를 출력한다. `문제 0건`이 될 때까지 좌표를 고친다.
    글자(이름, 라벨)를 바꿔서 검사를 통과시키지 않는다. 내용이 바뀌기 때문이다.
-5. **PNG를 직접 열어 본다(Read).** 검사기는 글자 폭을 어림으로 재므로 눈으로 아래 체크리스트를 확인한다.
+5. **PNG를 직접 열어 본다.** Claude Code는 Read, Codex는 이미지 보기 도구로 연다. 검사기는 글자 폭을 어림으로 재므로
+   눈으로 아래 체크리스트를 확인한다.
 6. **문서에 넣는다.** 기존 docx 그림을 바꿀 때는 `references/layout-guide.md`의 'docx 그림 바꾸기'를 따른다.
 
 ## spec 쓰는 법
