@@ -9,6 +9,7 @@
 # 사용법: ./install.sh [--uninstall]
 # 변경사항 내역:
 # - 2026-11-03 | 최초 작성 | Claude Code, Codex 링크 설치와 제거
+# - 2026-11-03 | 벡터 출력 | fontTools 설치 여부 안내 추가
 set -euo pipefail
 
 SKILL_NAME="aws-style-diagram"
@@ -44,8 +45,9 @@ done
 
 if [[ "${uninstall}" == false ]]; then
   command -v python3 >/dev/null || echo "참고: python3 이 없어 render.py 를 실행할 수 없습니다."
+  python3 -c "import fontTools" 2>/dev/null || echo "참고: fontTools 가 없습니다. python3 -m pip install fonttools 로 설치하세요."
   if [[ -z "${CHROME_PATH:-}" && ! -e "/Applications/Google Chrome.app" ]] \
      && ! command -v google-chrome >/dev/null && ! command -v chromium >/dev/null; then
-    echo "참고: Chrome 또는 Chromium 이 없어 PNG 는 만들지 못합니다(SVG, HTML 은 만듭니다). CHROME_PATH 로 경로를 줄 수 있습니다."
+    echo "참고: Chrome 또는 Chromium 이 없어 PDF 와 PNG 는 만들지 못합니다(벡터 SVG 는 만듭니다). CHROME_PATH 로 경로를 줄 수 있습니다."
   fi
 fi

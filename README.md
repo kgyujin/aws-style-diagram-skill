@@ -8,9 +8,9 @@
 [![AWS Architecture Icons](https://img.shields.io/badge/AWS_Architecture_Icons-2026.07-232F3E)](assets/NOTICE.md)
 
 AWS 공식 아이콘 스타일로 아키텍처 그림을 그리는 에이전트 스킬입니다.<br>
-JSON 하나로 그림을 정의하면 문서에 바로 넣을 수 있는 PNG가 나옵니다. 선이 겹치거나 글자를 가리는 곳은 자동으로 찾아 줍니다.
+JSON 하나로 그림을 정의하면 확대해도 깨지지 않는 SVG와 PDF, 그리고 PNG가 나옵니다. 선이 겹치거나 글자를 가리는 곳은 자동으로 찾아 줍니다.
 
-![GitHub Actions로 ECS Fargate에 배포하는 구성도](examples/out/ecs-cicd.png)
+![GitHub Actions로 ECS Fargate에 배포하는 구성도](examples/out/ecs-cicd.svg)
 
 </div>
 
@@ -21,7 +21,8 @@ JSON 하나로 그림을 정의하면 문서에 바로 넣을 수 있는 PNG가 
 - **AWS 공식 아이콘 그대로**: 서비스 아이콘 305개에 더해 AWS Cloud, Region, VPC, 서브넷 같은 그룹 상자와 사용자, 모바일, 건물 같은 일반 아이콘을 담았습니다. `eks`, `rds`, `alb`처럼 짧은 이름으로 부릅니다.
 - **AWS 밖 기술도 같은 모양으로**: React, FastAPI, GitHub Actions, Argo CD, 쿠버네티스, Stripe 같은 로고를 브랜드색 정사각형 타일로 바꿔 AWS 아이콘 옆에 놓아도 어색하지 않게 맞춥니다.
 - **배치 검사**: 선이 아이콘이나 글자를 지나가는지, 라벨이 다른 선이나 그룹 테두리에 걸치는지, 노드가 그룹 경계에 걸치는지, 사선이 섞였는지를 찾아 알려 줍니다.
-- **문서용 크기**: 폭 1100px 캔버스를 3배로 찍습니다. A4 본문 폭에 넣어도 글자가 9~10pt로 읽힙니다.
+- **깨지지 않는 벡터 출력**: 글자는 함께 넣은 오픈소스 글꼴(Pretendard)의 윤곽선으로, 아이콘과 화살표는 벡터 도형으로 넣습니다. SVG와 PDF에 글꼴과 이미지가 하나도 들어가지 않아 어느 프로그램에서 열어도 같은 모양이고, 아무리 확대해도 깨지지 않습니다.
+- **문서용 크기**: 폭 1100px 캔버스를 기준으로 합니다. A4 본문 폭에 넣어도 글자가 9~10pt로 읽힙니다.
 - **Claude Code와 Codex에서 함께**: 같은 스킬 하나를 두 도구에서 그대로 씁니다.
 
 ## 설치
@@ -37,7 +38,7 @@ npx skills add kgyujin/aws-style-diagram-skill -g
 | 갱신 | `npx skills update -g aws-style-diagram` |
 | 삭제 | `npx skills remove -g aws-style-diagram` |
 
-그림을 그리려면 Python 3.9 이상과 Google Chrome(또는 Chromium)이 있어야 합니다. Chrome이 다른 곳에 있으면 `CHROME_PATH`로 경로를 알려 주세요.
+그림을 그리려면 Python 3.9 이상, fontTools(`python3 -m pip install fonttools`), Google Chrome(또는 Chromium)이 있어야 합니다. Chrome은 PDF와 PNG를 만들 때 씁니다. 다른 곳에 있으면 `CHROME_PATH`로 경로를 알려 주세요.
 
 <details>
 <summary>직접 설치(스킬을 고치면서 쓸 때)</summary>
@@ -71,7 +72,7 @@ GitHub Actions에서 ECR을 거쳐 EKS로 배포하는 흐름을 그림으로 �
 
 ```bash
 cd ~/.claude/skills/aws-style-diagram
-python3 -I scripts/render.py examples/serverless.json out/   # SVG, HTML, PNG 저장 + 배치 검사
+python3 -I scripts/render.py examples/serverless.json out/   # SVG, PDF, PNG 저장 + 배치 검사
 python3 -I scripts/render.py --icons dynamo                  # 아이콘 이름 찾기
 python3 -I scripts/fetch_brand.py redis mongodb              # 기술 로고 더 받기
 ```
@@ -98,8 +99,9 @@ spec은 그룹(상자), 노드(아이콘), 선 세 가지로 이루어집니다.
 실행하면 그림 세 가지를 저장하고 배치 검사 결과를 출력합니다.
 
 ```text
-saved .../out/order.png
 saved .../out/order.svg
+saved .../out/order.png
+saved .../out/order.pdf
 
 배치 검사: 문제 0건
 ```
@@ -113,7 +115,7 @@ saved .../out/order.svg
 
 | 서버리스 사진 업로드 | 웹 3계층 |
 | --- | --- |
-| ![서버리스 구성도](examples/out/serverless.png) | ![웹 3계층 구성도](examples/out/web3tier.png) |
+| ![서버리스 구성도](examples/out/serverless.svg) | ![웹 3계층 구성도](examples/out/web3tier.svg) |
 | [`serverless.json`](examples/serverless.json) Cognito, API Gateway, Lambda, S3, DynamoDB, CloudFront | [`web3tier.json`](examples/web3tier.json) 리전, 퍼블릭/프라이빗 서브넷, ALB, ECS, Aurora |
 
 맨 위 그림은 [`ecs-cicd.json`](examples/ecs-cicd.json)입니다. GitHub Actions가 ECR에 이미지를 올리고 ECS Fargate 서비스에 배포하는 구성입니다.
@@ -143,12 +145,13 @@ aws-style-diagram-skill/
 ├── assets/
 │   ├── aws/               # AWS 아이콘과 이름표(index.json)
 │   ├── brands/            # 기술 로고와 brands.json
+│   ├── fonts/             # Pretendard 글꼴(OFL), 글자를 윤곽선으로 바꿀 때 사용
 │   └── NOTICE.md          # 아이콘 출처
-├── examples/              # 예시 spec과 결과 PNG
+├── examples/              # 예시 spec과 결과 그림(SVG, PNG)
 └── references/
     └── layout-guide.md    # 배치 가이드
 ```
 
 ## 아이콘 출처
 
-AWS 아이콘은 [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)에서 가져왔습니다. AWS가 허락하는 범위인 아키텍처 그림에만 씁니다. 기술 로고는 [Simple Icons](https://simpleicons.org) 16.33.0에서 받았고 각 로고는 해당 소유자의 상표입니다. 자세한 출처는 [assets/NOTICE.md](assets/NOTICE.md)에 있습니다.
+글꼴은 [Pretendard](https://github.com/orioncactus/pretendard)(SIL Open Font License 1.1)를 함께 넣었습니다. AWS 아이콘은 [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)에서 가져왔습니다. AWS가 허락하는 범위인 아키텍처 그림에만 씁니다. 기술 로고는 [Simple Icons](https://simpleicons.org) 16.33.0에서 받았고 각 로고는 해당 소유자의 상표입니다. 자세한 출처는 [assets/NOTICE.md](assets/NOTICE.md)에 있습니다.
