@@ -5,12 +5,15 @@
   python3 -I fetch_brand.py --find "spring boot"   # slug 찾기
   python3 -I fetch_brand.py mylogo --file a.svg --hex "#112233" --title "My Logo" --license "확인한 라이선스"
                                                    # Simple Icons에 없는 로고(공식 SVG 한 개 path 기준)
+  python3 -I fetch_brand.py mylogo --file a.svg --hex "#112233" --local
+                                                   # 저장소 대신 로컬 폴더(~/.config/aws-style-diagram/brands)에 넣기
 
 받은 색은 타일 배경색이 된다. 흰 글리프와 대비가 낮은 밝은 색(예: React #61DAFB)은
 자동으로 어두운 배경(#20232A)에 브랜드색 글리프로 바꿔 적는다.
 """
 import argparse
 import json
+import os
 import pathlib
 import re
 import unicodedata
@@ -20,7 +23,8 @@ SI = "16.33.0"
 BASE = f"https://cdn.jsdelivr.net/npm/simple-icons@{SI}"
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 BRANDS = ROOT / "assets" / "brands"
-TABLE = BRANDS / "brands.json"
+LOCAL = pathlib.Path(os.environ.get("AWS_STYLE_DIAGRAM_BRANDS",
+                                    pathlib.Path.home() / ".config" / "aws-style-diagram" / "brands"))
 
 
 def get(url):
@@ -51,11 +55,12 @@ def colors_for(hexcolor):
 
 
 def load_table():
-    return json.loads(TABLE.read_text()) if TABLE.exists() else {}
+    table = BRANDS / "brands.json"
+    return json.loads(table.read_text()) if table.exists() else {}
 
 
 def save_table(t):
-    TABLE.write_text(json.dumps(t, ensure_ascii=False, indent=1, sort_keys=True))
+    (BRANDS / "brands.json").write_text(json.dumps(t, ensure_ascii=False, indent=1, sort_keys=True))
 
 
 def main():
@@ -67,7 +72,11 @@ def main():
     ap.add_argument("--title")
     ap.add_argument("--license")
     ap.add_argument("--source")
+    ap.add_argument("--local", action="store_true", help="저장소가 아닌 로컬 로고 폴더에 넣는다")
     a = ap.parse_args()
+    global BRANDS
+    if a.local:
+        BRANDS = LOCAL
     BRANDS.mkdir(parents=True, exist_ok=True)
     table = load_table()
 

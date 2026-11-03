@@ -25,6 +25,14 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 ASSETS = ROOT / "assets"
 AWS_INDEX = json.loads((ASSETS / "aws" / "index.json").read_text())
 BRANDS = json.loads((ASSETS / "brands" / "brands.json").read_text())
+BRAND_DIR = {k: ASSETS / "brands" for k in BRANDS}
+# 저장소에 올리지 않을 로고(라이선스 미확인, 사내 로고 등)는 로컬 폴더에 둔다. 같은 이름이면 로컬이 이긴다.
+LOCAL_BRANDS = pathlib.Path(os.environ.get("AWS_STYLE_DIAGRAM_BRANDS",
+                                           pathlib.Path.home() / ".config" / "aws-style-diagram" / "brands"))
+if (LOCAL_BRANDS / "brands.json").exists():
+    _local = json.loads((LOCAL_BRANDS / "brands.json").read_text())
+    BRANDS.update(_local)
+    BRAND_DIR.update({k: LOCAL_BRANDS for k in _local})
 
 ICON = 52            # 노드 아이콘 한 변(px)
 LABEL_PX, SUB_PX = 17, 14
@@ -65,7 +73,7 @@ def find_icon(name):
 
 def brand_tile(slug, size=80):
     meta = BRANDS[slug]
-    svg = (ASSETS / "brands" / f"{slug}.svg").read_text()
+    svg = (BRAND_DIR[slug] / f"{slug}.svg").read_text()
     vb = [float(v) for v in re.search(r'viewBox="([^"]+)"', svg).group(1).split()]
     paths = re.findall(r'<path[^>]*\sd="([^"]+)"', svg)
     w, h = vb[2], vb[3]

@@ -100,3 +100,5 @@ python3 -I "$SKILL/scripts/fetch_brand.py" redis mongodb          # 없는 기�
 - `assets/brands/`: Simple Icons 16.33.0 글리프(대부분 CC0). 색과 라이선스는 `brands.json`에 있다.
   CC0는 그림 파일 저작권만 푸는 것이고 상표 사용 허락은 아니다. 공개 발표 전에는 `guidelines` 주소를 읽는다.
 - 새 로고는 `fetch_brand.py`로만 넣는다. 손으로 받은 SVG는 출처와 라이선스가 남지 않는다.
+- 라이선스를 확인하지 못한 로고나 사내 로고는 `--local`을 붙여 `~/.config/aws-style-diagram/brands`에 넣는다
+  (`AWS_STYLE_DIAGRAM_BRANDS`로 바꿀 수 있다). 저장소에 올라가지 않고 `render.py`가 함께 읽는다.
