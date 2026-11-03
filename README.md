@@ -2,8 +2,8 @@
 
 # aws-style-diagram
 
-[![Claude Code](https://img.shields.io/badge/Claude_Code-skill-D97757)](#설치)
-[![Codex](https://img.shields.io/badge/Codex-skill-412991)](#설치)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-skill-D97757)](#npx로-설치)
+[![Codex](https://img.shields.io/badge/Codex-skill-412991)](#npx로-설치)
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)](#준비물)
 [![AWS Architecture Icons](https://img.shields.io/badge/AWS_Architecture_Icons-2026.07-232F3E)](assets/NOTICE.md)
 
@@ -31,7 +31,21 @@ JSON 하나로 그림을 정의하면 문서에 바로 넣을 수 있는 PNG가 
 - Python 3.9 이상 (표준 라이브러리만 씁니다)
 - Google Chrome 또는 Chromium. PNG를 찍을 때 씁니다. 다른 위치에 있으면 `CHROME_PATH`로 경로를 알려 주세요.
 
-### 설치
+### npx로 설치
+
+clone 없이 설치하고, 갱신과 삭제도 `npx skills`로 합니다. Node.js가 필요합니다.
+
+```bash
+npx skills add kgyujin/aws-style-diagram-skill -g -a claude-code -a codex   # 설치
+npx skills update -g aws-style-diagram                                      # 갱신
+npx skills remove -g aws-style-diagram                                      # 삭제
+```
+
+`-g`는 모든 프로젝트에서 쓰도록 사용자 폴더에 설치하고, `-a`는 설치할 도구를 고릅니다. `-a`를 빼면 설치할 때 물어봅니다. 같은 컴퓨터에서 아래 clone 설치와 함께 쓰지 마세요. 두 방식이 같은 스킬 폴더를 씁니다.
+
+### clone으로 설치
+
+스킬을 직접 고치면서 쓸 때는 저장소를 받아 링크로 연결합니다.
 
 ```bash
 git clone https://github.com/kgyujin/aws-style-diagram-skill.git ~/workspace/aws-style-diagram-skill
