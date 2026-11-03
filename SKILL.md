@@ -12,7 +12,7 @@ Claude Code와 Codex에서 같은 폴더를 함께 쓴다(`install.sh`가 두 �
 
 ```bash
 SKILL="<이 SKILL.md가 있는 폴더의 절대경로>"
-python3 -I "$SKILL/scripts/render.py" <spec.json> <출력폴더>     # 벡터 SVG, 벡터 PDF, PNG(3배) + 배치 검사
+python3 -I "$SKILL/scripts/render.py" <spec.json> <출력폴더>     # 벡터 SVG, 벡터 PDF, PNG(4배, 384dpi) + 배치 검사
 python3 -I "$SKILL/scripts/render.py" --icons rds                 # 아이콘 이름 찾기
 python3 -I "$SKILL/scripts/fetch_brand.py" redis mongodb          # 없는 기술 로고 받기
 ```
@@ -51,10 +51,14 @@ Chrome 경로가 다르면 `CHROME_PATH`로 준다.
   같은 id가 부딪혀 모양이 바뀌는 일을 막는다.
 - **화살촉은 삼각형 도형, 반투명은 opacity 속성.** marker와 rgba를 쓰지 않아 이것을 잘 못 그리는 프로그램에서도 같다.
 - **PDF도 벡터다.** 같은 SVG를 그림 크기에 맞춘 한 장짜리 PDF로 출력한다. 글꼴과 이미지가 들어가지 않는다.
+- **PNG도 선이 번지지 않는다.** 기본 4배(`--scale 4`)로 찍는다. 좌표는 4px 격자, 선 굵기는 0.5의 배수라 4배면 선 가장자리가
+  픽셀 경계에 딱 맞는다. 3배 같은 홀수 배율은 1px 선이 반 픽셀에 걸쳐 흐린 회색 테두리가 생기므로 쓰지 않는다.
+  더 크게 필요하면 6, 8처럼 짝수로 준다. PNG에는 해상도(배율 × 96dpi)를 적어 문서에 그림 크기 그대로 고해상도로 들어간다.
 - 글꼴에 없는 글자(예: 이모지)가 있으면 배치 검사가 알려 준다. 빈 상자로 나오기 때문에 다른 글자로 바꾼다.
 
 문서에는 되도록 SVG나 PDF를 넣는다. Word와 PowerPoint(Microsoft 365, 2019 이상)는 SVG를 그대로 넣을 수 있고,
-한글이나 예전 Office처럼 SVG를 못 넣는 곳에는 PDF나 PNG를 쓴다.
+한글이나 예전 Office처럼 SVG를 못 넣는 곳에는 PDF나 PNG를 쓴다. Word는 저장할 때 그림을 220ppi로 줄이므로
+PNG를 넣은 문서는 파일 → 옵션 → 고급 → '파일의 이미지 압축 안 함'을 켠다.
 
 ## 순서
 

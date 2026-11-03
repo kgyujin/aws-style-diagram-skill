@@ -1,7 +1,7 @@
 """AWS 아키텍처 아이콘 스타일 구성도를 spec JSON으로 그린다(벡터 SVG, 벡터 PDF, PNG).
 
 사용:
-  python3 -I render.py <spec.json> <출력폴더> [--scale 3] [--strict] [--no-pdf]
+  python3 -I render.py <spec.json> <출력폴더> [--scale 4] [--strict] [--no-pdf]
   python3 -I render.py --icons eks          # 아이콘 이름 찾기
 
 spec 형식은 SKILL.md의 'spec 쓰는 법'에 있다. 그린 뒤 배치 검사를 돌려 문제를 출력한다.
@@ -10,6 +10,9 @@ spec 형식은 SKILL.md의 'spec 쓰는 법'에 있다. 그린 뒤 배치 검사
 - AWS 서비스, 그룹, 일반 리소스 아이콘은 assets/aws/(공식 AWS Architecture Icons)를 그대로 넣는다.
 - AWS가 아닌 기술 로고는 assets/brands/의 글리프를 AWS 서비스 아이콘과 같은 정사각형 타일로 만든다.
 - PNG와 PDF는 Chrome(또는 Chromium) headless로 만든다. 경로는 CHROME_PATH 환경 변수로 바꿀 수 있다.
+- PNG는 기본 4배로 찍는다. 좌표가 4px 격자이고 선 굵기가 0.5의 배수라 4배면 선 가장자리가 픽셀 경계에
+  딱 맞아 흐린 회색 테두리가 생기지 않는다(3배처럼 홀수 배율은 1px 선이 반 픽셀에 걸쳐 번진다).
+  PNG에는 해상도(배율 × 96dpi)를 적어 문서에 넣을 때 그림 크기 그대로 고해상도로 들어가게 한다.
 
 양식(기본 테마 editorial):
 - diagram-design(cathrynlavery/diagram-design, MIT)의 편집 디자인 체계를 따른다. 색은 역할 토큰
@@ -75,7 +78,7 @@ EDGE_COLOR = {"default": "muted", "primary": "accent", "link": "link"}
 
 # editorial 그룹: (선 불투명도, 점선, 바탕 불투명도, 선 굵기, 기본 아이콘). 색은 모두 ink다.
 EDITORIAL_GROUP = {
-    "aws-cloud": (0.60, None, 0, 1.2, "group-aws-cloud-logo"),
+    "aws-cloud": (0.60, None, 0, 1.5, "group-aws-cloud-logo"),
     "region": (0.45, "4 4", 0, 1, "group-region"),
     "vpc": (0.50, None, 0, 1, "group-virtual-private-cloud-vpc"),
     "private-subnet": (0.25, None, 0.035, 1, "group-private-subnet"),
@@ -461,7 +464,7 @@ def render(spec):
             color, dash, fill, default_icon = AWS_GROUP[gtype]
             color = g.get("color", color)
             da = ' stroke-dasharray="6 4"' if dash else ""
-            s = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="{color}" stroke-width="1.6"{da}/>']
+            s = [f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{fill}" stroke="{color}" stroke-width="1.5"{da}/>']
             icon, ix, iy, isz, tx = g.get("icon", default_icon), x, y, 30, x + 10
             tcolor, topacity = color, None
         else:
@@ -495,7 +498,7 @@ def render(spec):
             used.add("focal")
             x0, y0, x1, y1 = focal_box(n)
             out_focal.append(f'<rect x="{x0}" y="{y0}" width="{x1 - x0}" height="{y1 - y0}" rx="8" '
-                             f'fill="{TOKENS["accent"]}" fill-opacity="0.08" stroke="{TOKENS["accent"]}" stroke-width="1.2"/>')
+                             f'fill="{TOKENS["accent"]}" fill-opacity="0.08" stroke="{TOKENS["accent"]}" stroke-width="1.5"/>')
         s = [inline_icon(n["icon"], cx - ICON / 2, top, ICON),
              text_svg("name", n["label"], cx, top + ICON + 22, ink, anchor="middle")]
         if n.get("sub"):
@@ -537,7 +540,7 @@ def render(spec):
             head0, draw[0] = arrow_head(pts[0], pts[1], color)
             heads.append(head0)
         da = ' stroke-dasharray="5 4"' if dashed else ""
-        sw = 1.8 if kind == "primary" else 1.5
+        sw = 2 if kind == "primary" else 1.5   # 0.5의 배수라야 PNG 4배에서 선이 픽셀에 맞는다
         out_edges.append(f'<path d="{rounded_path(draw)}" fill="none" stroke="{color}" stroke-width="{sw}" '
                          f'stroke-linecap="round" stroke-linejoin="round"{da}/>' + "".join(heads))
         segs = list(zip(pts, pts[1:]))
@@ -617,7 +620,7 @@ def render(spec):
         for k in order:
             if k == "focal":
                 legend.append(f'<rect x="{x}" y="{by - 11}" width="24" height="14" rx="3" fill="{TOKENS["accent"]}" '
-                              f'fill-opacity="0.08" stroke="{TOKENS["accent"]}" stroke-width="1.2"/>')
+                              f'fill-opacity="0.08" stroke="{TOKENS["accent"]}" stroke-width="1.5"/>')
             else:
                 c = TOKENS["muted"] if k == "dashed" else TOKENS[EDGE_COLOR[k]]
                 da = ' stroke-dasharray="5 4"' if k == "dashed" else ""
@@ -650,6 +653,26 @@ def render(spec):
     return svg, sorted(set(problems)), advice, (W, total_h, paper)
 
 
+def set_png_dpi(path, dpi):
+    """PNG에 pHYs(해상도)를 넣는다. 없으면 72dpi로 여겨 문서에 너무 크게 들어갔다가 줄며 뭉개진다."""
+    import struct
+    import zlib
+    b = path.read_bytes()
+    ppm = round(dpi / 0.0254)
+    body = b"pHYs" + struct.pack(">IIB", ppm, ppm, 1)
+    chunk = struct.pack(">I", 9) + body + struct.pack(">I", zlib.crc32(body) & 0xFFFFFFFF)
+    out, i = [b[:8]], 8
+    while i < len(b):
+        n = struct.unpack(">I", b[i:i + 4])[0]
+        kind = b[i + 4:i + 8]
+        if kind != b"pHYs":
+            out.append(b[i:i + 12 + n])
+        if kind == b"IHDR":
+            out.append(chunk)
+        i += 12 + n
+    path.write_bytes(b"".join(out))
+
+
 def find_chrome():
     cands = [os.environ.get("CHROME_PATH"),
              "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -666,7 +689,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("spec", nargs="?")
     ap.add_argument("out", nargs="?")
-    ap.add_argument("--scale", type=float, default=3)
+    ap.add_argument("--scale", type=int, default=4, help="PNG 배율. 짝수(4, 6, 8)라야 선이 픽셀에 맞는다")
     ap.add_argument("--strict", action="store_true")
     ap.add_argument("--no-pdf", action="store_true", help="PDF를 만들지 않는다")
     ap.add_argument("--icons", help="이름에 이 글자가 든 아이콘을 찾는다")
@@ -702,6 +725,7 @@ def main():
         png = out / f"{name}.png"
         subprocess.run(base + [f"--force-device-scale-factor={a.scale}", f"--window-size={W},{H}",
                                f"--screenshot={png}", html.as_uri()], check=True, capture_output=True)
+        set_png_dpi(png, 96 * a.scale)
         print("saved", png)
         if not a.no_pdf:
             pdf = out / f"{name}.pdf"
