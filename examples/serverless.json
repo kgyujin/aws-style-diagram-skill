@@ -1,31 +1,209 @@
 {
   "name": "serverless",
-  "canvas": {"width": 1100, "height": 650},
+  "canvas": {
+    "width": 1100,
+    "height": 648
+  },
   "groups": [
-    {"type": "aws-cloud", "x": 160, "y": 20, "w": 920, "h": 610, "title": "AWS Cloud"},
-    {"type": "region", "x": 185, "y": 60, "w": 870, "h": 550, "title": "리전"}
+    {
+      "type": "aws-cloud",
+      "x": 160,
+      "y": 20,
+      "w": 920,
+      "h": 608,
+      "title": "AWS Cloud"
+    },
+    {
+      "type": "region",
+      "x": 184,
+      "y": 60,
+      "w": 872,
+      "h": 552,
+      "title": "리전"
+    }
   ],
   "nodes": [
-    {"id": "user", "icon": "mobile", "cx": 75, "top": 260, "label": "사용자", "sub": "모바일 앱"},
-    {"id": "cognito", "icon": "amazon-cognito", "cx": 330, "top": 110, "label": "Amazon Cognito", "sub": "로그인, 토큰 발급"},
-    {"id": "apigw", "icon": "api-gateway", "cx": 330, "top": 260, "label": "API Gateway", "sub": "업로드 API"},
-    {"id": "upload", "icon": "lambda", "cx": 545, "top": 260, "label": "업로드 함수", "sub": "Lambda"},
-    {"id": "raw", "icon": "s3", "cx": 755, "top": 260, "label": "원본 버킷", "sub": "Amazon S3"},
-    {"id": "thumb", "icon": "lambda", "cx": 960, "top": 260, "label": "썸네일 함수", "sub": "Lambda"},
-    {"id": "meta", "icon": "dynamodb", "cx": 545, "top": 430, "label": "사진 정보", "sub": "DynamoDB"},
-    {"id": "cdn", "icon": "cloudfront", "cx": 330, "top": 430, "label": "CloudFront", "sub": "사진 보기"},
-    {"id": "small", "icon": "s3", "cx": 960, "top": 430, "label": "썸네일 버킷", "sub": "Amazon S3"}
+    {
+      "id": "user",
+      "icon": "mobile",
+      "cx": 76,
+      "top": 260,
+      "label": "사용자",
+      "sub": "모바일 앱"
+    },
+    {
+      "id": "cognito",
+      "icon": "amazon-cognito",
+      "cx": 328,
+      "top": 112,
+      "label": "Amazon Cognito",
+      "sub": "로그인, 토큰 발급"
+    },
+    {
+      "id": "apigw",
+      "icon": "api-gateway",
+      "cx": 328,
+      "top": 260,
+      "label": "API Gateway",
+      "sub": "업로드 API"
+    },
+    {
+      "id": "upload",
+      "icon": "lambda",
+      "cx": 544,
+      "top": 260,
+      "label": "업로드 함수",
+      "sub": "Lambda",
+      "focal": true
+    },
+    {
+      "id": "raw",
+      "icon": "s3",
+      "cx": 756,
+      "top": 260,
+      "label": "원본 버킷",
+      "sub": "Amazon S3"
+    },
+    {
+      "id": "thumb",
+      "icon": "lambda",
+      "cx": 960,
+      "top": 260,
+      "label": "썸네일 함수",
+      "sub": "Lambda"
+    },
+    {
+      "id": "meta",
+      "icon": "dynamodb",
+      "cx": 544,
+      "top": 432,
+      "label": "사진 정보",
+      "sub": "DynamoDB"
+    },
+    {
+      "id": "cdn",
+      "icon": "cloudfront",
+      "cx": 328,
+      "top": 432,
+      "label": "CloudFront",
+      "sub": "사진 보기"
+    },
+    {
+      "id": "small",
+      "icon": "s3",
+      "cx": 960,
+      "top": 432,
+      "label": "썸네일 버킷",
+      "sub": "Amazon S3"
+    }
   ],
   "edges": [
-    {"path": ["user.t", [75, 136], "cognito.l"], "label": "로그인", "at": [115, 136]},
-    {"path": ["user.r", "apigw.l"], "label": "사진 올리기", "bold": true, "at": [245, 286]},
-    {"path": ["user.b", [75, 456], "cdn.l"], "label": "사진 보기", "at": [115, 456]},
-    {"path": ["apigw.t", "cognito.b"], "label": "토큰 확인", "style": "dashed"},
-    {"path": ["apigw.r", "upload.l"], "label": "요청 전달", "bold": true},
-    {"path": ["upload.r", "raw.l"], "label": "원본 저장", "bold": true},
-    {"path": ["upload.b", "meta.t"], "label": "정보 기록"},
-    {"path": ["raw.r", "thumb.l"], "label": "업로드 이벤트", "style": "dashed"},
-    {"path": ["thumb.b", "small.t"], "label": "썸네일 저장"},
-    {"path": ["cdn.b", [330, 575], [960, 575], "small.b"], "label": "썸네일 읽기", "at": [645, 575]}
+    {
+      "path": [
+        "user.t",
+        [
+          76,
+          136
+        ],
+        "cognito.l"
+      ],
+      "label": "로그인",
+      "at": [
+        116,
+        136
+      ]
+    },
+    {
+      "path": [
+        "user.r",
+        "apigw.l"
+      ],
+      "label": "사진 올리기",
+      "bold": true,
+      "at": [
+        244,
+        288
+      ]
+    },
+    {
+      "path": [
+        "user.b",
+        [
+          76,
+          456
+        ],
+        "cdn.l"
+      ],
+      "label": "사진 보기",
+      "at": [
+        116,
+        456
+      ]
+    },
+    {
+      "path": [
+        "apigw.t",
+        "cognito.b"
+      ],
+      "label": "토큰 확인",
+      "style": "dashed"
+    },
+    {
+      "path": [
+        "apigw.r",
+        "upload.l"
+      ],
+      "label": "요청 전달",
+      "bold": true
+    },
+    {
+      "path": [
+        "upload.r",
+        "raw.l"
+      ],
+      "label": "원본 저장",
+      "bold": true
+    },
+    {
+      "path": [
+        "upload.b",
+        "meta.t"
+      ],
+      "label": "정보 기록"
+    },
+    {
+      "path": [
+        "raw.r",
+        "thumb.l"
+      ],
+      "label": "업로드 이벤트",
+      "style": "dashed"
+    },
+    {
+      "path": [
+        "thumb.b",
+        "small.t"
+      ],
+      "label": "썸네일 저장"
+    },
+    {
+      "path": [
+        "cdn.b",
+        [
+          328,
+          576
+        ],
+        [
+          960,
+          576
+        ],
+        "small.b"
+      ],
+      "label": "썸네일 읽기",
+      "at": [
+        644,
+        576
+      ]
+    }
   ]
 }

@@ -21,7 +21,8 @@ JSON 하나로 그림을 정의하면 확대해도 깨지지 않는 SVG와 PDF, 
 - **AWS 공식 아이콘 그대로**: 서비스 아이콘 305개에 더해 AWS Cloud, Region, VPC, 서브넷 같은 그룹 상자와 사용자, 모바일, 건물 같은 일반 아이콘을 담았습니다. `eks`, `rds`, `alb`처럼 짧은 이름으로 부릅니다.
 - **AWS 밖 기술도 같은 모양으로**: React, FastAPI, GitHub Actions, Argo CD, 쿠버네티스, Stripe 같은 로고를 브랜드색 정사각형 타일로 바꿔 AWS 아이콘 옆에 놓아도 어색하지 않게 맞춥니다.
 - **배치 검사**: 선이 아이콘이나 글자를 지나가는지, 라벨이 다른 선이나 그룹 테두리에 걸치는지, 노드가 그룹 경계에 걸치는지, 사선이 섞였는지를 찾아 알려 줍니다.
-- **깨지지 않는 벡터 출력**: 글자는 함께 넣은 오픈소스 글꼴(Pretendard)의 윤곽선으로, 아이콘과 화살표는 벡터 도형으로 넣습니다. SVG와 PDF에 글꼴과 이미지가 하나도 들어가지 않아 어느 프로그램에서 열어도 같은 모양이고, 아무리 확대해도 깨지지 않습니다.
+- **통일된 편집 양식**: [diagram-design](https://github.com/cathrynlavery/diagram-design)의 디자인 체계를 따릅니다. 역할별로 정한 색, 그림당 1~2곳만 쓰는 강조, 모서리가 둥근 직각 선, 선에서 띄워 놓는 라벨, 아래쪽 범례 띠, 4px 격자로 어떤 그림이든 같은 모양새로 나옵니다.
+- **깨지지 않는 벡터 출력**: 글자는 함께 넣은 오픈소스 글꼴(Geist, Geist Mono, Pretendard)의 윤곽선으로, 아이콘과 화살표는 벡터 도형으로 넣습니다. SVG와 PDF에 글꼴과 이미지가 하나도 들어가지 않아 어느 프로그램에서 열어도 같은 모양이고, 아무리 확대해도 깨지지 않습니다.
 - **문서용 크기**: 폭 1100px 캔버스를 기준으로 합니다. A4 본문 폭에 넣어도 글자가 9~10pt로 읽힙니다.
 - **Claude Code와 Codex에서 함께**: 같은 스킬 하나를 두 도구에서 그대로 씁니다.
 
@@ -77,20 +78,20 @@ python3 -I scripts/render.py --icons dynamo                  # 아이콘 이름 
 python3 -I scripts/fetch_brand.py redis mongodb              # 기술 로고 더 받기
 ```
 
-spec은 그룹(상자), 노드(아이콘), 선 세 가지로 이루어집니다. 선은 `fn.r`(아이콘 오른쪽), `fn.b+20`(아래쪽에서 20px 옆)처럼 노드 이름으로 잇고 꺾이는 점만 좌표로 적습니다.
+spec은 그룹(상자), 노드(아이콘), 선 세 가지로 이루어집니다. 좌표는 4의 배수로 적고, 핵심 노드에는 `"focal": true`, 주 흐름 선에는 `"kind": "primary"`를 붙입니다. 선은 `fn.r`(아이콘 오른쪽), `fn.b+20`(아래쪽에서 20px 옆)처럼 노드 이름으로 잇고 꺾이는 점만 좌표로 적습니다.
 
 ```json
 {
   "name": "order",
   "canvas": {"width": 800, "height": 340},
-  "groups": [{"type": "aws-cloud", "x": 170, "y": 20, "w": 610, "h": 300, "title": "AWS Cloud"}],
+  "groups": [{"type": "aws-cloud", "x": 168, "y": 20, "w": 612, "h": 300, "title": "AWS Cloud"}],
   "nodes": [
-    {"id": "user", "icon": "users", "cx": 75, "top": 140, "label": "사용자"},
-    {"id": "fn", "icon": "lambda", "cx": 360, "top": 140, "label": "주문 함수", "sub": "Lambda"},
+    {"id": "user", "icon": "users", "cx": 76, "top": 140, "label": "사용자"},
+    {"id": "fn", "icon": "lambda", "cx": 360, "top": 140, "label": "주문 함수", "sub": "Lambda", "focal": true},
     {"id": "db", "icon": "dynamodb", "cx": 620, "top": 140, "label": "주문 테이블", "sub": "DynamoDB"}
   ],
   "edges": [
-    {"path": ["user.r", "fn.l"], "label": "주문", "at": [255, 166]},
+    {"path": ["user.r", "fn.l"], "label": "주문", "at": [256, 164], "kind": "primary"},
     {"path": ["fn.r", "db.l"], "label": "저장"}
   ]
 }
@@ -145,7 +146,7 @@ aws-style-diagram-skill/
 ├── assets/
 │   ├── aws/               # AWS 아이콘과 이름표(index.json)
 │   ├── brands/            # 기술 로고와 brands.json
-│   ├── fonts/             # Pretendard 글꼴(OFL), 글자를 윤곽선으로 바꿀 때 사용
+│   ├── fonts/             # Geist, Geist Mono, Pretendard 글꼴(OFL), 글자를 윤곽선으로 바꿀 때 사용
 │   └── NOTICE.md          # 아이콘 출처
 ├── examples/              # 예시 spec과 결과 그림(SVG, PNG)
 └── references/
@@ -154,4 +155,4 @@ aws-style-diagram-skill/
 
 ## 아이콘 출처
 
-글꼴은 [Pretendard](https://github.com/orioncactus/pretendard)(SIL Open Font License 1.1)를 함께 넣었습니다. AWS 아이콘은 [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)에서 가져왔습니다. AWS가 허락하는 범위인 아키텍처 그림에만 씁니다. 기술 로고는 [Simple Icons](https://simpleicons.org) 16.33.0에서 받았고 각 로고는 해당 소유자의 상표입니다. 자세한 출처는 [assets/NOTICE.md](assets/NOTICE.md)에 있습니다.
+디자인 체계는 [diagram-design](https://github.com/cathrynlavery/diagram-design)(MIT)을 따랐습니다. 글꼴은 [Geist](https://github.com/vercel/geist-font)와 [Pretendard](https://github.com/orioncactus/pretendard)(모두 SIL Open Font License 1.1)를 함께 넣었습니다. AWS 아이콘은 [AWS Architecture Icons](https://aws.amazon.com/architecture/icons/)에서 가져왔습니다. AWS가 허락하는 범위인 아키텍처 그림에만 씁니다. 기술 로고는 [Simple Icons](https://simpleicons.org) 16.33.0에서 받았고 각 로고는 해당 소유자의 상표입니다. 자세한 출처는 [assets/NOTICE.md](assets/NOTICE.md)에 있습니다.
