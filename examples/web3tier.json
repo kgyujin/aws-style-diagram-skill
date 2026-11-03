@@ -1,0 +1,28 @@
+{
+  "name": "web3tier",
+  "canvas": {"width": 1100, "height": 640},
+  "groups": [
+    {"type": "aws-cloud", "x": 160, "y": 20, "w": 920, "h": 600, "title": "AWS Cloud"},
+    {"type": "region", "x": 185, "y": 60, "w": 870, "h": 540, "title": "서울 리전"},
+    {"type": "vpc", "x": 380, "y": 100, "w": 650, "h": 470, "title": "VPC"},
+    {"type": "public-subnet", "x": 405, "y": 140, "w": 180, "h": 400, "title": "퍼블릭"},
+    {"type": "private-subnet", "x": 610, "y": 140, "w": 400, "h": 400, "title": "프라이빗"}
+  ],
+  "nodes": [
+    {"id": "user", "icon": "users", "cx": 75, "top": 240, "label": "사용자", "sub": "웹 브라우저"},
+    {"id": "cf", "icon": "cloudfront", "cx": 280, "top": 240, "label": "CloudFront", "sub": "정적 파일"},
+    {"id": "s3", "icon": "s3", "cx": 280, "top": 430, "label": "Amazon S3", "sub": "화면 빌드"},
+    {"id": "alb", "icon": "alb", "cx": 495, "top": 240, "label": "ALB", "sub": "/api 요청"},
+    {"id": "ecs", "icon": "ecs", "cx": 700, "top": 240, "label": "Amazon ECS", "sub": "Spring Boot"},
+    {"id": "hf", "icon": "huggingface", "cx": 900, "top": 240, "label": "모델 서버", "sub": "Hugging Face"},
+    {"id": "db", "icon": "aurora", "cx": 800, "top": 420, "label": "Aurora", "sub": "MySQL"}
+  ],
+  "edges": [
+    {"path": ["user.r", "cf.l"], "label": "접속", "at": [220, 266]},
+    {"path": ["cf.b", "s3.t"], "label": "화면 파일", "at": [280, 385]},
+    {"path": ["cf.r", "alb.l"], "label": "/api", "at": [345, 266], "bold": true},
+    {"path": ["alb.r", "ecs.l"], "label": "요청", "at": [640, 266], "bold": true},
+    {"path": ["ecs.r", "hf.l"], "label": "추론"},
+    {"path": ["ecs.b", [700, 446], "db.l"], "label": "읽고 쓴다", "at": [700, 370]}
+  ]
+}

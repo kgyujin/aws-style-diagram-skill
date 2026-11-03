@@ -1,0 +1,35 @@
+{
+  "name": "ecs-cicd",
+  "canvas": {"width": 1100, "height": 870},
+  "groups": [
+    {"type": "box", "x": 20, "y": 12, "w": 540, "h": 180, "title": "GitHub", "icon": "github"},
+    {"type": "aws-cloud", "x": 160, "y": 228, "w": 925, "h": 625, "title": "AWS Cloud"},
+    {"type": "vpc", "x": 440, "y": 262, "w": 635, "h": 520, "title": "VPC"},
+    {"type": "public-subnet", "x": 465, "y": 302, "w": 175, "h": 460, "title": "퍼블릭 서브넷"},
+    {"type": "private-subnet", "x": 665, "y": 302, "w": 395, "h": 460, "title": "프라이빗 서브넷"},
+    {"type": "box-dashed", "x": 790, "y": 345, "w": 140, "h": 355, "title": "ECS 서비스"}
+  ],
+  "nodes": [
+    {"id": "code", "icon": "github", "cx": 100, "top": 62, "label": "코드 저장소", "sub": "main 브랜치"},
+    {"id": "gha", "icon": "githubactions", "cx": 330, "top": 62, "label": "GitHub Actions", "sub": "테스트, 빌드, 배포"},
+    {"id": "user", "icon": "users", "cx": 70, "top": 500, "label": "사용자", "sub": "웹 브라우저"},
+    {"id": "ecr", "icon": "ecr", "cx": 330, "top": 280, "label": "Amazon ECR", "sub": "이미지 저장소"},
+    {"id": "secret", "icon": "secrets-manager", "cx": 330, "top": 600, "label": "Secrets Manager", "sub": "DB 비밀번호"},
+    {"id": "logs", "icon": "cloudwatch", "cx": 330, "top": 720, "label": "CloudWatch", "sub": "로그, 지표"},
+    {"id": "alb", "icon": "alb", "cx": 552, "top": 500, "label": "ALB", "sub": "요청 나누기"},
+    {"id": "order", "icon": "aws-fargate", "cx": 860, "top": 380, "label": "주문 API", "sub": "Fargate 작업"},
+    {"id": "pay", "icon": "aws-fargate", "cx": 860, "top": 560, "label": "결제 API", "sub": "Fargate 작업"},
+    {"id": "db", "icon": "aurora", "cx": 1005, "top": 490, "label": "Aurora", "sub": "PostgreSQL"}
+  ],
+  "edges": [
+    {"path": ["code.r", "gha.l"], "label": "push, PR"},
+    {"path": ["gha.b", "ecr.t"], "label": "이미지 올리기", "at": [330, 210]},
+    {"path": ["gha.r", [905, 88], [905, 343]], "label": "서비스 배포", "at": [660, 88], "bold": true},
+    {"path": ["user.r", "alb.l"], "label": "접속", "bold": true, "at": [128, 526]},
+    {"path": ["alb.r", [788, 526]], "label": "요청", "bold": true, "at": [720, 526]},
+    {"path": [[932, 516], "db.l"], "label": "읽고\n쓴다", "at": [956, 482]},
+    {"path": ["ecr.b", [330, 420], [788, 420]], "label": "이미지 가져오기", "at": [560, 420], "style": "dashed"},
+    {"path": ["secret.r", [788, 626]], "label": "비밀 값 읽기", "at": [560, 626], "style": "dashed"},
+    {"path": [[860, 702], [860, 746], "logs.r"], "label": "로그", "at": [600, 746], "style": "dashed"}
+  ]
+}

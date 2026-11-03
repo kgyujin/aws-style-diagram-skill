@@ -1,0 +1,378 @@
+{
+ "anthropic": {
+  "bg": "#191919",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.anthropic.com",
+  "title": "Anthropic"
+ },
+ "apacheairflow": {
+  "bg": "#017CEE",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.apache.org/foundation/marks",
+  "license": "Apache-2.0",
+  "source": "https://apache.org/logos",
+  "title": "Apache Airflow"
+ },
+ "apachekafka": {
+  "bg": "#231F20",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.apache.org/foundation/marks",
+  "license": "Apache-2.0",
+  "source": "https://apache.org/logos",
+  "title": "Apache Kafka"
+ },
+ "argo": {
+  "bg": "#EF7B4D",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/cncf/artwork/blob/c2e619cdf85e8bac090ceca7c0834c5cfedf9426/projects/argo/icon/black/argo-icon-black.svg",
+  "title": "Argo"
+ },
+ "datadog": {
+  "bg": "#632CA6",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.datadoghq.com/about/resources/",
+  "license": "CC0-1.0",
+  "source": "https://www.datadoghq.com/about/resources",
+  "title": "Datadog"
+ },
+ "django": {
+  "bg": "#092E20",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.djangoproject.com/community/logos/",
+  "title": "Django"
+ },
+ "docker": {
+  "bg": "#2496ED",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.docker.com/company/newsroom/media-resources",
+  "title": "Docker"
+ },
+ "elasticsearch": {
+  "bg": "#005571",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.elastic.co/brand",
+  "title": "Elasticsearch"
+ },
+ "fastapi": {
+  "bg": "#009688",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/tiangolo/fastapi/blob/ffb4f77a11f83132b521ba0aac6c95792c19e797/docs/en/docs/img/icon-white.svg",
+  "title": "FastAPI"
+ },
+ "figma": {
+  "bg": "#F24E1E",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.figma.com/using-the-figma-brand/",
+  "license": "CC0-1.0",
+  "source": "https://www.figma.com/using-the-figma-brand/",
+  "title": "Figma"
+ },
+ "flask": {
+  "bg": "#3BABC3",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/pallets/flask/blob/85c5d93cbd049c4bd0679c36fd1ddcae8c37b642/docs/_static/flask-icon.svg",
+  "title": "Flask"
+ },
+ "github": {
+  "bg": "#181717",
+  "fg": "#FFFFFF",
+  "guidelines": "https://github.com/logos",
+  "license": "CC0-1.0",
+  "source": "https://github.com/logos",
+  "title": "GitHub"
+ },
+ "githubactions": {
+  "bg": "#2088FF",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/features/actions",
+  "title": "GitHub Actions"
+ },
+ "gitlab": {
+  "bg": "#FC6D26",
+  "fg": "#FFFFFF",
+  "guidelines": "https://about.gitlab.com/handbook/marketing/corporate-marketing/brand-activation/trademark-guidelines/",
+  "license": "CC0-1.0",
+  "source": "https://about.gitlab.com/press/press-kit/",
+  "title": "GitLab"
+ },
+ "go": {
+  "bg": "#00ADD8",
+  "fg": "#FFFFFF",
+  "guidelines": "https://blog.golang.org/go-brand",
+  "license": "CC0-1.0",
+  "source": "https://blog.golang.org/go-brand",
+  "title": "Go"
+ },
+ "grafana": {
+  "bg": "#F46800",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://grafana.com",
+  "title": "Grafana"
+ },
+ "helm": {
+  "bg": "#0F1689",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://helm.sh",
+  "title": "Helm"
+ },
+ "huggingface": {
+  "bg": "#20232A",
+  "fg": "#FFD21E",
+  "guidelines": "https://huggingface.co/brand",
+  "license": "CC0-1.0",
+  "source": "https://huggingface.co/brand",
+  "title": "Hugging Face"
+ },
+ "javascript": {
+  "bg": "#20232A",
+  "fg": "#F7DF1E",
+  "guidelines": null,
+  "license": "MIT",
+  "source": "https://github.com/voodootikigod/logo.js/blob/1544bdeed6d618a6cfe4f0650d04ab8d9cfa76d9/js.svg",
+  "title": "JavaScript"
+ },
+ "jenkins": {
+  "bg": "#D24939",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.jenkins.io/press/",
+  "license": "CC-BY-SA-3.0",
+  "source": "https://get.jenkins.io/art/",
+  "title": "Jenkins"
+ },
+ "kubernetes": {
+  "bg": "#326CE5",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/kubernetes/kubernetes/tree/cac53883f4714452f3084a22e4be20d042a9df33/logo",
+  "title": "Kubernetes"
+ },
+ "langchain": {
+  "bg": "#20232A",
+  "fg": "#7FC8FF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.langchain.com/langchain",
+  "title": "LangChain"
+ },
+ "mongodb": {
+  "bg": "#47A248",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.mongodb.com/pressroom",
+  "title": "MongoDB"
+ },
+ "mysql": {
+  "bg": "#4479A1",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.mysql.com/about/legal/logos.html",
+  "license": "CC0-1.0",
+  "source": "https://www.mysql.com/about/legal/logos.html",
+  "title": "MySQL"
+ },
+ "nextdotjs": {
+  "bg": "#000000",
+  "fg": "#FFFFFF",
+  "guidelines": "https://vercel.com/design/brands#next-js",
+  "license": "CC0-1.0",
+  "source": "https://vercel.com/design/brands#next-js",
+  "title": "Next.js"
+ },
+ "nginx": {
+  "bg": "#009639",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.nginx.com/press/",
+  "license": "CC0-1.0",
+  "source": "https://www.nginx.com/press/",
+  "title": "NGINX"
+ },
+ "nodedotjs": {
+  "bg": "#5FA04E",
+  "fg": "#FFFFFF",
+  "guidelines": "https://nodejs.org/en/about/branding",
+  "license": "CC0-1.0",
+  "source": "https://nodejs.org/en/about/branding",
+  "title": "Node.js"
+ },
+ "notion": {
+  "bg": "#000000",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.notion.so",
+  "title": "Notion"
+ },
+ "ollama": {
+  "bg": "#000000",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/ollama/ollama/issues/2152#issuecomment-1905286922",
+  "title": "Ollama"
+ },
+ "openai": {
+  "bg": "#412991",
+  "fg": "#FFFFFF",
+  "guidelines": "https://openai.com/brand",
+  "license": "CC0-1.0 (Simple Icons 이전 버전, 16.33.0에서는 빠짐)",
+  "source": "https://openai.com/brand",
+  "title": "OpenAI"
+ },
+ "postgresql": {
+  "bg": "#4169E1",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.postgresql.org/about/policies/trademarks/",
+  "license": "CC0-1.0",
+  "source": "https://wiki.postgresql.org/wiki/Logo",
+  "title": "PostgreSQL"
+ },
+ "prometheus": {
+  "bg": "#E6522C",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://prometheus.io",
+  "title": "Prometheus"
+ },
+ "python": {
+  "bg": "#3776AB",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.python.org/community/logos/",
+  "license": "CC0-1.0",
+  "source": "https://www.python.org/community/logos/",
+  "title": "Python"
+ },
+ "pytorch": {
+  "bg": "#EE4C2C",
+  "fg": "#FFFFFF",
+  "guidelines": "https://github.com/pytorch/pytorch.github.io/blob/381117ec296f002b2de475402ef29cca6c55e209/assets/brand-guidelines/PyTorch-Brand-Guidelines.pdf",
+  "license": "CC0-1.0",
+  "source": "https://github.com/pytorch/pytorch.github.io/blob/8f083bd12192ca12d5e1c1f3d236f4831d823d8f/assets/images/logo.svg",
+  "title": "PyTorch"
+ },
+ "rabbitmq": {
+  "bg": "#FF6600",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.rabbitmq.com/trademark-guidelines.html",
+  "license": "CC0-1.0",
+  "source": "https://www.rabbitmq.com",
+  "title": "RabbitMQ"
+ },
+ "react": {
+  "bg": "#20232A",
+  "fg": "#61DAFB",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/facebook/create-react-app/blob/282c03f9525fdf8061ffa1ec50dce89296d916bd/test/fixtures/relative-paths/src/logo.svg",
+  "title": "React"
+ },
+ "redis": {
+  "bg": "#FF4438",
+  "fg": "#FFFFFF",
+  "guidelines": "https://redis.io/brand-guidelines",
+  "license": "CC0-1.0",
+  "source": "https://redis.io/brand-guidelines",
+  "title": "Redis"
+ },
+ "sentry": {
+  "bg": "#362D59",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://sentry.io/branding/",
+  "title": "Sentry"
+ },
+ "spring": {
+  "bg": "#6DB33F",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://spring.io/trademarks",
+  "title": "Spring"
+ },
+ "springboot": {
+  "bg": "#6DB33F",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://spring.io/projects",
+  "title": "Spring Boot"
+ },
+ "stripe": {
+  "bg": "#635BFF",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://stripe.com/newsroom/information",
+  "title": "Stripe"
+ },
+ "supabase": {
+  "bg": "#20232A",
+  "fg": "#3FCF8E",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/supabase/supabase/blob/4031a7549f5d46da7bc79c01d56be4177dc7c114/packages/common/assets/images/supabase-logo-wordmark--light.svg",
+  "title": "Supabase"
+ },
+ "tensorflow": {
+  "bg": "#FF6F00",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://www.tensorflow.org",
+  "title": "TensorFlow"
+ },
+ "terraform": {
+  "bg": "#844FBA",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.hashicorp.com/brand",
+  "license": "CC0-1.0",
+  "source": "https://www.hashicorp.com/brand",
+  "title": "Terraform"
+ },
+ "typescript": {
+  "bg": "#3178C6",
+  "fg": "#FFFFFF",
+  "guidelines": "https://www.typescriptlang.org/branding",
+  "license": "CC0-1.0",
+  "source": "https://www.typescriptlang.org/branding",
+  "title": "TypeScript"
+ },
+ "vercel": {
+  "bg": "#000000",
+  "fg": "#FFFFFF",
+  "guidelines": "https://vercel.com/geist/brands",
+  "license": "CC0-1.0",
+  "source": "https://vercel.com/geist/brands",
+  "title": "Vercel"
+ },
+ "vite": {
+  "bg": "#9135FF",
+  "fg": "#FFFFFF",
+  "guidelines": null,
+  "license": "CC0-1.0",
+  "source": "https://github.com/voidzero-dev/community-design-resources/blob/55902097229cf01cf2a4ceb376f992f5cf306756/brand-assets/vite/vite-icon-color-bracketless.svg",
+  "title": "Vite"
+ }
+}
